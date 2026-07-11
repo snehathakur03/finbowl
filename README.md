@@ -1,16 +1,66 @@
-# React + Vite
+# Fin Bowl System
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+A React + Vite front-end for managing loan applicants and disbursements — built as part of a React assignment.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- **Applicant Details Page** — tabbed view of an applicant's loan details, broker info, commission, documents, disbursements, notes, and activity log.
+- **Disbursement Page** — table of disbursements with metrics summary, filters, pagination, loading skeleton, and error state handling.
+- Reusable common components (Button, Badge, StatusBadge, Avatar, Toggle, SectionCard, DetailTable, etc.) shared across pages.
+- App layout with sidebar and top bar navigation.
 
-## React Compiler
+## Tech Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- [React 19](https://react.dev/)
+- [Vite](https://vitejs.dev/) (with Rolldown)
+- [Tailwind CSS 4](https://tailwindcss.com/)
+- [Oxlint](https://oxc.rs/) for linting
 
-## Expanding the Oxlint configuration
+## Project Structure
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+```
+src/
+  components/
+    applicant/       # Applicant details page and its sections
+    disbursement/     # Disbursement list page, table, filters, pagination
+    layout/            # Sidebar, top bar, app shell
+    common/           # Shared UI primitives
+  data/               # Mock data used during development
+  hooks/              # Custom hooks (e.g. useDisbursements)
+```
+
+## Getting Started
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+Run the dev server:
+
+```bash
+npm run dev
+```
+
+Lint the code:
+
+```bash
+npm run lint
+```
+
+Build for production:
+
+```bash
+npm run build
+```
+
+Preview the production build:
+
+```bash
+npm run preview
+```
+
+## Notes
+
+Data is currently sourced from local mock files (`src/data/mockApplicant.js`, `src/data/mockDisbursements.js`). Swapping in a live API means replacing the mock imports in `useDisbursements` (and the applicant page) with real `fetch` calls, while keeping the existing loading/error/empty states already built into the disbursement page (`TableSkeleton`, `ErrorState`, `EmptyState`).
