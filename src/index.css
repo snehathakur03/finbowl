@@ -1,0 +1,133 @@
+@import 'tailwindcss';
+
+/*
+  Design tokens extracted from the Fin Bowl "Disbursement" Figma screen.
+  Exposed to Tailwind v4 via @theme so they are usable as utilities
+  (e.g. text-ink, bg-canvas, rounded-card, text-display-sm).
+*/
+@theme {
+  --font-sans: 'Poppins', ui-sans-serif, system-ui, -apple-system, sans-serif;
+
+  /* Brand / purples */
+  --color-brand-600: #7f56d9;
+  --color-brand-700: #6941c6;
+  --color-brand-800: #42307d;
+  --color-brand-900: #2c1c5f;
+
+  /* Neutrals (Figma greys) */
+  --color-ink: #171717;
+  --color-ink-soft: #404040;
+  --color-muted: #525252;
+  --color-subtle: #737373;
+  --color-line: #e5e5e5;
+  --color-line-strong: #d4d4d4;
+  --color-surface: #ffffff;
+  --color-canvas: #f7f5ff;
+  --color-zebra: #fafafa;
+  --color-head: #f9f5ff;
+
+  /* Status accents */
+  --color-success-600: #16a34a;
+  --color-danger-600: #dc2626;
+
+  /* Radii */
+  --radius-card: 12px;
+
+  /* Type scale (size / line-height) */
+  --text-2xs: 12px;
+  --text-2xs--line-height: 18px;
+  --text-sm: 14px;
+  --text-sm--line-height: 20px;
+  --text-md: 16px;
+  --text-md--line-height: 24px;
+  --text-xl: 20px;
+  --text-xl--line-height: 30px;
+  --text-display-sm: 30px;
+  --text-display-sm--line-height: 38px;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  overflow-x: hidden;
+  font-family: var(--font-sans);
+  background: var(--color-canvas);
+  color: var(--color-ink);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* --- Small utility classes for effects that aren't worth a token --- */
+
+/* Sidebar purple gradient (exact Figma angle + stops) */
+.bg-sidebar {
+  background: linear-gradient(
+    15.34deg,
+    #6941c6 18.11%,
+    #42307d 40.01%,
+    #2c1c5f 78.48%
+  );
+}
+
+/* shadow-xs used on cards, inputs */
+.shadow-xs {
+  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+/* skeuomorphic button shadow used on secondary/ghost buttons + tabs */
+.shadow-skeu {
+  box-shadow:
+    0px 1px 2px rgba(0, 0, 0, 0.05),
+    inset 0px 0px 0px 1px rgba(0, 0, 0, 0.18),
+    inset 0px -2px 0px rgba(0, 0, 0, 0.05);
+}
+
+/* Card drop shadow used on the table wrapper */
+.shadow-card {
+  box-shadow: 0px 2px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Loading shimmer */
+@keyframes fb-shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
+.skeleton {
+  position: relative;
+  overflow: hidden;
+  background: #ececf3;
+  border-radius: 6px;
+}
+.skeleton::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0,
+    rgba(255, 255, 255, 0.6) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  animation: fb-shimmer 1.4s infinite;
+}
+
+/* thin scrollbar for the horizontally-scrolling table */
+.scroll-thin {
+  scrollbar-width: thin;
+  scrollbar-color: #d4d4d4 transparent;
+}
+.scroll-thin::-webkit-scrollbar {
+  height: 8px;
+  width: 8px;
+}
+.scroll-thin::-webkit-scrollbar-thumb {
+  background: #d4d4d4;
+  border-radius: 9999px;
+}
